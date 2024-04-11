@@ -1,5 +1,13 @@
 <html>
     <body>
-        <h1>asdasdasd</h1>
+        <h1>Pusher private channels test</h1>
+        <script src="//js.pusher.com/8.0.1/pusher.min.js"></script>
+        <script>
+        var pusher = new Pusher("773a52d041be55294763", {
+            channelAuthorization: {
+                endpoint: "dev-cluster-lb-50103950.eu-central-1.elb.amazonaws.com/api/v1/pusher/auth",
+            },
+        });
+        </script>
     </body>
 </html>
