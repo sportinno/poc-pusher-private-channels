@@ -1,17 +1,30 @@
 <html>
     <body>
         <h1>Pusher private channels test</h1>
+        <div id="dump"></div>
         <script src="//js.pusher.com/8.0.1/pusher.min.js"></script>
         <script>
-            var pusher = new Pusher("773a52d041be55294763", {
-                cluster: "eu",
+            const pusher = new Pusher('773a52d041be55294763', {
+                cluster: 'eu',
                 channelAuthorization: {
-                    endpoint: "https://fjaq0f39rk.execute-api.eu-central-1.amazonaws.com/api/v1/pusher/auth",
+                    endpoint: 'https://fjaq0f39rk.execute-api.eu-central-1.amazonaws.com/api/v1/pusher/auth',
                 },
             });
 
-            var privateChannel = pusher.subscribe("private-my-channel");
-            console.log(privateChannel);
+            const randomNumber = Math.floor(Math.random() * 2) + 1;
+            const myChannel = `private-my-channel-${randomNumber}`;
+            const privateChannel = pusher.subscribe(myChannel);
+            const dumpElement = document.getElementById('dump');
+
+            privateChannel.bind('fixture-change', (data) => {
+                const strigifiedData = JSON.stringify(data)
+                dumpElement.innerHTML += `<div>Fixture Change: ${strigifiedData}</div>`;
+            });
+
+            privateChannel.bind('odds-change', (data) => {
+                const strigifiedData = JSON.stringify(data)
+                dumpElement.innerHTML += `<div>Odds Change: ${strigifiedData}</div>`;
+            });
         </script>
     </body>
 </html>
