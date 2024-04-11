@@ -1,6 +1,7 @@
 <html>
     <body>
         <h1>Pusher private channels test</h1>
+        <h3>You happen to be user: <span id="user-id"></span></h3>
         <div id="dump"></div>
         <script src="//js.pusher.com/8.0.1/pusher.min.js"></script>
         <script>
@@ -12,6 +13,7 @@
             });
 
             const randomNumber = Math.floor(Math.random() * 2) + 1;
+            document.getElementById('user-id').innerHTML = `<em>${randomNumber}</em>`;
             const myChannel = `private-my-channel-${randomNumber}`;
             const privateChannel = pusher.subscribe(myChannel);
             const dumpElement = document.getElementById('dump');
